@@ -12,19 +12,26 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-hf+v)qv-n%=ulk33n*vg49!e*n-y*=hy++%(s4^dxpqnv^670p"
 
-# SECURITY WARNING: don't run with debug turned on in production!
+
+
+
+
+
+
 DEBUG = True
+
+# SECURITY WARNING: don't run with debug turned on in production!
+#DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -88,10 +98,24 @@ DATABASES = {
         'NAME': 'foodonline_db',
         'USER': 'postgres',
         'PASSWORD': '12345',
-        'PORT': '5433',
+        'PORT': '5432',
         'HOST':'localhost',
     }
 }
+
+
+AUTH_USER_MODEL = 'accounts.User'
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': config('DB_PORT'),
+#     }
+# }
 
 
 # Password validation
