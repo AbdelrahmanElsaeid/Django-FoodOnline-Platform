@@ -12,7 +12,7 @@
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                         <div class="logo">
                             <figure>
-                                <a href="index.html" class="light-logo">
+                                <a href="{% url 'index' %}" class="light-logo">
                                     <img src="{% static 'logo/foodOnlineLogo.png' %}" alt="FoodBakery" width="250">
                                 </a>
                             </figure>
@@ -59,7 +59,7 @@
                                 </nav><!-- .main-navigation -->
                             </div>
                         
-                        <div class="main-location">
+                        <div class="main-location ml-5">
                             <ul>
                                 <li class="location-has-children choose-location">
                                     <form action="#">
@@ -73,9 +73,10 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="login-option">
-                            <a class="cs-color cs-popup-joinus-btn login-popup" data-target="#sign-in" data-toggle="modal" href="#user-register">Login / Register</a><a class="get-start-btn" href="register-restaurant.html">
-                                Register
-                                Restaurant </a>
+                            <a class="cs-color cs-popup-joinus-btn login-popup" href="#">Login</a> / 
+                            <span><a href="{% url 'registerUser' %}" class="cs-color cs-popup-joinus-btn login-popup ml-0">Register</a></span><a class="get-start-btn" href="#">
+                            Register
+                            Restaurant </a>
                         </div>
                     </div>
                 </div>
