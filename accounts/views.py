@@ -176,7 +176,7 @@ def vendorDashboard(request):
 #---------------------reset Password---------------------------------------
 
 
-def  forgetPassword(request):
+def forgot_password(request):
     if request.method=='POST':
         email = request.POST['email']
         if User.objects.filter(email=email).exists():
@@ -197,7 +197,7 @@ def  forgetPassword(request):
     return render(request, 'accounts/forget_password.html')
 
 
-def  resest_password_validate(request, uidb64, token):
+def reset_password_validate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User._default_manager.get(pk=uid)
@@ -215,7 +215,7 @@ def  resest_password_validate(request, uidb64, token):
 
 
 
-def  resestPassword(request):
+def reset_password(request):
     if request.method == 'POST':
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']

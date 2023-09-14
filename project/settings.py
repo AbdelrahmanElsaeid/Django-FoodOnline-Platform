@@ -180,7 +180,7 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'abdelrahmanelsaeid5@gmail.com'
 EMAIL_HOST_PASSWORD = 'rpjeagymlhppcazl'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'foodOnline Marketplace <developerabdelrahman5@gmail.com>'
+DEFAULT_FROM_EMAIL = 'foodOnline Marketplace <abdelrahmanelsaeid5@gmail.com>'
 
 
 # EMAIL_HOST = config('EMAIL_HOST')
