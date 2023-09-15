@@ -11,6 +11,8 @@ from django.core.exceptions import PermissionDenied
 
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
+
+from vendor.models import Vendor
 # Create your views here.
 
 
@@ -167,6 +169,7 @@ def custDashboard(request):
 @login_required(login_url='login')
 @user_passes_test(check_user_vendor)
 def vendorDashboard(request):
+    
     return render(request, 'accounts/vendorDashboard.html')
 
 
