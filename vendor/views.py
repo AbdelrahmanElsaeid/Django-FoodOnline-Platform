@@ -75,10 +75,12 @@ def add_category(request):
             category_name = form.cleaned_data['category_name']
             category = form.save(commit=False)
             category.vendor = vendor
-            category.slug = slu
+            category.slug = slugify(category_name)
             form.save()
             messages.success(request, "Category Added successfully.")
             return redirect('menu_builder')
+        else:
+            print(form.errors)
         
     else:        
         form = CategoryForm()
@@ -86,3 +88,35 @@ def add_category(request):
         'form':form
     }
     return render(request,'vendor/add_category.html', context)
+
+
+def edit_category(request, pk=None):
+    vendor = Vendor.objects.get(user=request.user)
+    category =get_object_or_404(Category, pk=pk)
+    if request.method=="POST":
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            category_name = form.cleaned_data['category_name']
+            category = form.save(commit=False)
+            category.vendor = vendor
+            category.slug = slugify(category_name)
+            form.save()
+            messages.success(request, "Category Added successfully.")
+            return redirect('menu_builder')
+        else:
+            print(form.errors)
+        
+    else:        
+        form = CategoryForm(instance=category)
+    context = {
+        'form':form,
+        'category':category
+    }
+    return render(request,'vendor/edit_category.html', context)
+
+
+def delete_category(request, pk=None):
+    category =get_object_or_404(Category, pk=pk)
+    category.delete()
+    messages.success(request,"category deleted")
+    return redirect('menu_builder')   
