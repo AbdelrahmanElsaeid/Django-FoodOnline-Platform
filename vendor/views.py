@@ -142,6 +142,7 @@ def add_food(request):
         
     else:        
         form = FooditemForm()
+        form.fields['category'].queryset=Category.objects.filter(vendor=vendor)
     context = {
         'form':form
     }
@@ -170,6 +171,7 @@ def edit_food(request, pk=None):
         
     else:        
         form = FooditemForm(instance=food)
+        form.fields['category'].queryset=Category.objects.filter(vendor=vendor)
     context = {
         'form':form,
         'food':food
