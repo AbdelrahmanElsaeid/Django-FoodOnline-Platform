@@ -73,6 +73,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="login-option">
+                            <a href="{% url 'marketplace' %}" class="btn btn-outline-danger text-uppercase font-weight-bold">Marketplace</a>
                             {% if user.is_authenticated %}
                                 <a class="cs-color cs-popup-joinus-btn login-popup" href="{% url 'myAccount' %}">My Account</a>  
 
