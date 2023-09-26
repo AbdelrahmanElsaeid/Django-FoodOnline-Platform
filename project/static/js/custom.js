@@ -106,6 +106,11 @@ $(document).ready(function(){
                     $('#cart_counter').html(response.cart_counter['cart_count']);
                     $('#qty-'+food_id).html(response.qty);
 
+                    applyCartAmounts(
+                        response.cart_amount['subtotal'],
+                        response.cart_amount['tax_dict'],
+                        response.cart_amount['grand_total']
+                    )
                 
                     
                 } 
@@ -150,11 +155,96 @@ $(document).ready(function(){
                 }else{
                     $('#cart_counter').html(response.cart_counter['cart_count']);
                     $('#qty-'+food_id).html(response.qty);
-
+                    
+                    applyCartAmounts(
+                        response.cart_amount['subtotal'],
+                        response.cart_amount['tax_dict'],
+                        response.cart_amount['grand_total']
+                    )
+                    removeCartItem(response.qty,cart_id)
+                    checkCartEmpty()
                 
                     
                 } 
             }
         })
     })
+
+// delete item cart
+$('.delete_cart').on('click', function(e){
+    e.preventDefault();
+    
+    //food_id = $(this).attr('data-id');
+    url = $(this).attr('data-url');
+    cart_id = $(this).attr('data-id');
+    
+    
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function(response){
+            console.log(response)
+            if(response.status == 'Failed'){
+                swal(response.message,"", "error");
+                removeCartItem(0,cart_id)
+           
+            }
+           
+            else{
+                $('#cart_counter').html(response.cart_counter['cart_count']);
+                swal(response.status, response.message,"success")
+               
+                applyCartAmounts(
+                    response.cart_amount['subtotal'],
+                    response.cart_amount['tax'],
+                    response.cart_amount['grand_total']
+                )
+
+                removeCartItem(0,cart_id)
+                checkCartEmpty()
+
+            
+                
+            } 
+        }
+    })
+})
+
+function removeCartItem(cartItemQty, cart_id){
+    if(cartItemQty <=0){
+        document.getElementById("cart-item-"+cart_id).remove()
+    }
+}
+
+
+function checkCartEmpty(){
+    var cart_count = document.getElementById('cart_counter').innerHTML
+    if(cart_count== 0){
+        document.getElementById('empty-cart').style.display = "block";
+    }
+}
+
+function applyCartAmounts(subtotal, tax, grand_total){
+    if(window.location.pathname == '/cart/'){
+        $('#subtotal').html(subtotal)
+        $('#tax').html(tax)
+        $('#total').html(grand_total)
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })
