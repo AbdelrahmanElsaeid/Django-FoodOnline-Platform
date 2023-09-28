@@ -59,51 +59,24 @@
                                             <a href="{% url 'vendor_detail' vendor.vendor_slug %}" class="viewmenu-btn text-color">View Menu</a>
                                         </div>
                                     </li>
+                                    {% if vendor.user_profile.address %}
+                                            <span><small class="text-muted">{{ vendor.user_profile.address }}</small></span>
+                                            {% endif %}
+
+                                            {% if source_location %}
+                                            <br>
+                                            <span><small><b>{{vendor.kms}}km</b> away from {{source_location}}</small></span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="list-option">
+
+                                            <a href="{% url 'vendor_detail' vendor.vendor_slug %}" class="viewmenu-btn text-color">View Menu</a>
+                                        </div>
+                                    </li>
                                     {% endfor %}
 
 
-                                    <li>
-                                        <div class="img-holder">
-                                            <figure>
-                                                <a href="#"><img src="assets/extra-images/fb-restaurant-04.jpg" class="img-list wp-post-image" alt=""> </a>
-                                            </figure>
-                                            <span class="restaurant-status close"><em class="bookmarkRibbon"></em>Close</span>
-                                        </div>
-                                        <div class="text-holder">
-                                            <div class="post-title">
-                                                <h5>
-                                                    <a href="listing-detail.html">Golden Chick Fries</a>
-                                                    <span class="sponsored text-color">Sponsored</span>
-                                                </h5>
-                                            </div>
-                                            <span class="post-categories"><span>Type of food :
-                                                </span>
-                                                Doughnut, Hot Dogs, Ice Cream</span>
-                                            
-                                        </div>
-                                        
-                                    </li>
-
-                                    <li>
-                                        <div class="img-holder">
-                                            <figure>
-                                                <a href="#"><img src="assets/extra-images/fb-restaurant-06.jpg" class="img-list wp-post-image" alt=""> </a>
-                                            </figure>
-                                            <span class="restaurant-status open"><em class="bookmarkRibbon"></em>Open</span>
-                                        </div>
-                                        <div class="text-holder">
-                                            <div class="post-title">
-                                                <h5>
-                                                    <a href="listing-detail.html">Dragon Express</a>
-                                                </h5>
-                                            </div>
-                                            <span class="post-categories"><span>Type of food :
-                                                </span> Apple
-                                                Juice, Carrot Juice, Ice Cream</span>
-                                            
-                                        </div>
-                                        
-                                    </li>
+                                    
                                 </ul>
                             </div>
                             
