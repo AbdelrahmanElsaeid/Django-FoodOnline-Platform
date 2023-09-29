@@ -7,7 +7,7 @@ from .models import Cart
 from django.http import HttpResponse, JsonResponse
 from .context_processor import get_cart_counter, get_cart_amounts
 from django.db.models import Q
-
+from django.contrib.auth.decorators import login_required
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.measure import D 
 from django.contrib.gis.db.models.functions import Distance
@@ -104,7 +104,7 @@ def decrease_cart(request, food_id=None):
 
 
 
-
+@login_required(login_url = 'login')
 def cart(request):
     
     cart_items = Cart.objects.filter(user=request.user).order_by('created_at')

@@ -11,3 +11,18 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = ()
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(UserProfile)
+
+
+
+
+
+
+# from django.contrib.gis import admin
+
+# from leaflet.admin import LeafletGeoAdmin
+
+# class UserProfileAdmin(admin.GeoModelAdmin):
+#     list_display = ['location'] 
+
+
+# admin.site.register(UserProfile,UserProfileAdmin)
