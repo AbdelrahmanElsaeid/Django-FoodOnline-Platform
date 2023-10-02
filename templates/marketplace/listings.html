@@ -35,7 +35,16 @@
 												{% else %}
 												<figure><a href="#"><img src="{% static 'extra-images/listing-logo18.png' %}" class="img-thumb wp-post-image" alt=""></a></figure>
 												{% endif %}
-                                            <span class="restaurant-status close"><em class="bookmarkRibbon"></em>Close</span>
+                                                {% if vendor.is_open %}
+                                                <span class="restaurant-status open">
+                                                    <em class="bookmarkRibbon"></em>Open
+                                                </span>
+                                            {% else %}
+                                                <span class="restaurant-status close">
+                                                    <em class="bookmarkRibbon"></em>Close
+                                                </span>
+                                            {% endif %}
+                                        </div>
                                         </div>
                                         <div class="text-holder">
                                             <div class="list-rating">
@@ -58,7 +67,7 @@
 
                                             <a href="{% url 'vendor_detail' vendor.vendor_slug %}" class="viewmenu-btn text-color">View Menu</a>
                                         </div>
-                                    </li>
+                                    
                                     {% if vendor.user_profile.address %}
                                             <span><small class="text-muted">{{ vendor.user_profile.address }}</small></span>
                                             {% endif %}

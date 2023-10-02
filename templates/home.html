@@ -142,9 +142,15 @@
 														{% endif %}
 													</a>
 												</figure>
-												<span class="restaurant-status close">
-													<em class="bookmarkRibbon"></em>Close
-												</span>
+												{% if vendor.is_open %}
+													<span class="restaurant-status open">
+														<em class="bookmarkRibbon"></em>Open
+													</span>
+												{% else %}
+													<span class="restaurant-status close">
+														<em class="bookmarkRibbon"></em>Close
+													</span>
+												{% endif %}
 											</div>
 											<div class="text-holder">
 												<div class="list-rating">
@@ -174,34 +180,6 @@
 									
 									
 									
-									<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-										<div class="list-post featured">
-											<div class="img-holder">
-												<figure><a href="#"><img src="extra-images/listing-logo09.png" class="img-thumb wp-post-image" alt=""></a></figure>
-												<span class="restaurant-status open">
-													<em class="bookmarkRibbon"></em>open
-												</span>
-											</div>
-											<div class="text-holder">
-												<div class="list-rating">
-													<div class="rating-star">
-														<span class="rating-box" style="width: 100%;"></span>
-													</div>
-													<span class="reviews">(1)</span>
-												</div>
-												<div class="post-title">
-													<h5>
-														<a href="listing-detail.html">Classic Restaurant</a>
-														<span class="sponsored text-color">Sponsored</span>
-													</h5>
-												</div>
-												<address> <span>Type of food : </span> Chicken Roast, Chines
-													Soup, Cold
-													Coffee, Cold Drink, Hot Dogs</address>
-											</div>
-											
-										</div>
-									</li>
 								</ul>
 							</div>
 						</div>
