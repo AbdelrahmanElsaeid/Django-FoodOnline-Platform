@@ -19,7 +19,7 @@ from django.urls import path, include
 from .views import home
 from django.conf import settings
 from django.conf.urls.static import static
-from marketplace.views import cart, search
+from marketplace.views import cart, search, checkout
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -29,6 +29,9 @@ urlpatterns = [
 
     path('cart/',cart, name='cart'),
     path('search/', search, name='search'),
+
+    # CHECKOUT
+    path('checkout/', checkout, name='checkout'),
 ]
 
 #static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
