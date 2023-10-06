@@ -20,7 +20,7 @@
                                     
 
                                     <div id="menu-item-list-6272" class="menu-itam-list">
-                                        <form action="#" method="POST">
+                                        <form action="{% url 'place_order' %}" method="POST">
                                             {% csrf_token %}
                                             <div class="row">
                                                 <div class="form-group col-md-6 col-sm-12 col-lg-6">
@@ -147,7 +147,24 @@
                                                 </span>
                                             </li>
 
-                                            <button  type="submit" class="btn btn-danger w-100 p-2 mt-3">PLACE ORDER</button>
+
+                                            <!-- Select payment method -->
+                                            <h5>SELECT PAYMENT METHOD</h5>
+                                            <div class="payment-method">
+                                                <label>
+                                                    <input type="radio" name="payment_method" value="PayPal">
+                                                    <img src="{% static 'images/PayPal.png' %}" alt="PayPal" width="100">
+                                                </label>
+                                                &emsp;
+                                                <label>
+                                                    <input type="radio" name="payment_method" value="RazorPay">
+                                                    <img src="{% static 'images/razorpay_logo.png' %}" alt="RazorPay" width="100">
+                                                </label>
+                                            </div>
+                                            <span class="text-danger" id="payment-method-error"></span>
+                                            <!-- Select payment method -->
+
+                                            <button  type="submit" onclick="return payMethodConfirm()" class="btn btn-danger w-100 p-2 mt-3">PLACE ORDER</button>
 
                                         </form>
                                         </ul>
@@ -165,5 +182,30 @@
         </div>
     </div>
 </div>
+
+<script>
+    function payMethodConfirm(){
+
+        var paymentmethod = $("input[name='payment_method']:checked").val()
+
+        if(!paymentmethod){
+            $('#payment-method-error').html('select Payment Method!');
+            return false;    
+        }else{
+            var conf = confirm('You have selected '+payMethod+' as your preferred payment method.\nClick "OK" to continue.')
+            if(conf == true){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
+    }
+
+    $('input[name=payment_method]').on('change', function(){
+        $('#payment-method-error').html("");
+    })
+</script>
+
 
 {% endblock body %}
