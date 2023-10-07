@@ -42,6 +42,43 @@ def place_order(request):
             order.save() 
             order.order_number = generate_order_number(order.id)
             order.save()
-              
+
+            context = {
+                'order': order,
+                'cart_items': cart_items,
+            }
+            return render(request, 'orders/place_order.html', context)
+        else:
+            print(form.errors)      
 
     return render(request,'orders/place_order.html')
+
+
+
+
+def payments(request):
+    # check request ajax 
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == 'POST':
+        # STORE THE PAYMENT DETAILS IN THE PAYMENT MODEL
+        order_number = request.POST.get('order_number')
+        transaction_id = request.POST.get('transaction_id')
+        payment_method = request.POST.get('payment_method')
+        status = request.POST.get('status')
+        print(order_number, transaction_id, payment_method, status)
+
+        order = Order.objects.get(user=request.user, order_number=order_number)
+        payment = Payment(
+            user = request.user,
+            transaction_id = transaction_id,
+            amount = order.total,
+            payment_method = payment_method,
+            status = status,
+        )
+        payment.save()
+
+        #update order model
+
+        order.payment=payment
+        order.is_ordered=True
+        order.save()
+    return HttpResponse('test')

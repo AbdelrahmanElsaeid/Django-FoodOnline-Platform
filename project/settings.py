@@ -84,6 +84,7 @@ TEMPLATES = [
                 "marketplace.context_processor.get_cart_counter",
                 "accounts.context_processor.get_google_api",
                 "marketplace.context_processor.get_cart_amounts",
+                'accounts.context_processor.get_paypal_client_id',
             ],
         },
     },
@@ -205,6 +206,9 @@ DEFAULT_FROM_EMAIL = 'foodOnline Marketplace <abdelrahmanelsaeid5@gmail.com>'
 
 GOOGLE_API_KEY = 'AIzaSyC4yTudrg2pTcB2khAgrbCMBFVvbviohVU'
 
+
+PAYPAL_CLIENT_ID = 'AYoV4hO1oOU2LM_cF2g5qfwyH9nIZDRR-n24EZxYHvjXhqZCstmbEIGzQODL-uPhZYQENv71BdQyw_zk'
+#SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
 os.environ['PATH'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
 os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\dataproj') + ';' + os.environ['PATH']
