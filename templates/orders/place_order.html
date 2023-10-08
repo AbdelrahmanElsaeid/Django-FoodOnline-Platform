@@ -144,6 +144,7 @@
     var grand_total = "{{ grand_total }}"
     var url = "{% url 'payments' %}"
     var order_number = "{{ order.order_number }}"
+    var order_complete = "{% url 'order_complete' %}"
     const csrftoken = getCookie('csrftoken');
     paypal.Buttons({
         // Set up the transaction
@@ -191,7 +192,10 @@
                 'csrfmiddlewaretoken': csrftoken,
             },
             success: function(response){
-                console.log('response==>', response)}
+                console.log('response==>', response);
+                window.location.href = order_complete +'?order_no='+response.order_number+'&trans_id='+response.transaction_id
+            
+            }
 
         })
     }
