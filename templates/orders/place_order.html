@@ -100,10 +100,16 @@
                                             </li>
                                             
 
-                                             <!--PayPal Checkout Button -->
-                                            <div id="paypal-button-container"></div>
                                             
+                                            {% if order.payment_method == 'PayPal' %}
+                                            <!-- PayPal Checkout Button -->
+                                            <div id="paypal-button-container"></div>
+                                            {% elif order.payment_method == 'RazorPay' %}
+                                            <div id="rzp_payment_button">
+                                                <button class="btn btn-danger w-100 p-2" id="rzp-button1">Pay with RazorPay</button>
+                                                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                                             </div>
+                                            {% endif %}
 
                                          
                                         </ul>
