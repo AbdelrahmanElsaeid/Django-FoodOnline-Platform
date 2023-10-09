@@ -106,7 +106,7 @@ def payments(request):
             'to_email': order.email,
             
         }
-        send_notification(mail_subject, mail_template, context)
+        #send_notification(mail_subject, mail_template, context)
 
 
         #send order received  email  to  the  vendor
@@ -127,7 +127,7 @@ def payments(request):
             'to_email': to_email,
             
         }
-        send_notification(mail_subject, mail_template, context)
+        #send_notification(mail_subject, mail_template, context)
         response={
             'order_number': order_number,
             'transaction_id':transaction_id
@@ -140,16 +140,16 @@ def payments(request):
 
 def order_complete(request):
 
-    order_number = request.GET.get('order_number')
-    transaction_id = request.GET.get('transaction_id')
-    try:
-        order = Order.objects.get(order_number=order_number, Payment__transaction_id= transaction_id, is_ordered = True)
+    order_number = request.GET.get('order_no')
+    transaction_id = request.GET.get('trans_id')
 
-        ordered_food = OrderedFood.objects.get(order=order)
+    try:
+        order = Order.objects.get(order_number=order_number, payment__transaction_id=transaction_id, is_ordered=True)
+        ordered_food = OrderedFood.objects.filter(order=order)
         context = {
             'order': order,
             'ordered_food':ordered_food,
         }
         return render(request,'orders/order_complete.html', context)
     except:
-        return redirect('home')
+        return redirect('index')
