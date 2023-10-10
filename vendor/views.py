@@ -11,6 +11,7 @@ from accounts.views import check_user_vendor
 from menu.forms import CategoryForm, FooditemForm
 from django.template.defaultfilters import slugify
 from django.db import IntegrityError
+from orders.models import Order, OrderedFood
 
 # Create your views here.
 
@@ -236,3 +237,20 @@ def remove_opening_hours(request, pk=None):
             hour = get_object_or_404(OpeningHour,pk=pk)
             hour.delete()
             return JsonResponse({'status': 'success', 'id':pk})
+        
+
+
+def order_detail(request, order_number):
+    vendor = Vendor.objects.get(user=request.user)
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=True)
+        ordered_food = OrderedFood.objects.filter(order=order, fooditem__vendor=vendor)
+
+        context = {
+            'order': order,
+            'ordered_food': ordered_food,
+           
+        }
+    except:
+        return redirect('vendor')
+    return render(request, 'vendor/order_detail.html', context)        
