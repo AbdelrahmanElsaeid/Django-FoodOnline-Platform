@@ -74,29 +74,30 @@
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<div class="user-orders-list">
 												<div class="responsive-table">
-													<ul class="table-generic">
-														<li class="order-heading-titles">
-															<div>Order Number</div>
-															<div>Name</div>
-															<div>Date</div>
-															<div>Total Price</div>															
-															<div>Status</div>
-															<div>Action</div>
-														</li>
-														{% for order in recent_orders %}
-														<li class="order-heading-titles">
-															<div>{{order.order_number}}</div>
-															<div>{{ order.name }}</div>
-															<div>{{ order.created_at }}</div>
-															<div>${{ order.total }}</div>
-															<div><span class="order-status" style="background-color: #047a06;">{{ order.status }}</span></div>
-															<div><a href="{% url 'order_detail' order.order_number %}" class="btn btn-danger">Details</a></div>
-														</li>
-														{% endfor %}
-														
-														
-														
-													</ul>
+													<table class="table table-hover" id="myOrdersTable">
+														<thead>
+														  <tr>
+															<th scope="col">Order #</th>
+															<th scope="col">Name</th>
+															<th scope="col">Total</th>
+															<th scope="col">Status</th>
+															<th scope="col">Date</th>
+															<th scope="col">Action</th>
+														  </tr>
+														</thead>
+														<tbody>
+															{% for order in recent_orders %}
+														  <tr>
+															<td>{{ order.order_number }}</td>
+															<td>{{ order.name }}</td>
+															<td>${{ order.total }}</td>
+															<td>{{ order.status }}</td>
+															<td>{{ order.created_at }}</td>
+															<td><a href="" class="btn btn-danger">Details</a></td>
+														  </tr>
+														  {% endfor %}
+														</tbody>
+													  </table>
 
 												</div>												
 											</div>

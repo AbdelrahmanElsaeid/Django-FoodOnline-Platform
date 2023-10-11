@@ -1,3 +1,4 @@
+import json
 from django.db import models
 from menu.models import FoodItem
 from vendor.models import Vendor
@@ -60,6 +61,36 @@ class Order(models.Model):
         return f'{self.first_name} {self.last_name}'
     def order_placed_to(self):
         return ", ".join([str(i) for i in self.vendors.all()])
+    
+    def get_total_by_vendor(self):
+        vendor = Vendor.objects.get(user=request_object.user)
+        subtotal = 0
+        tax = 0
+        tax_dict = {}
+        if self.total_data:
+            total_data = json.loads(self.total_data)
+            data = total_data.get(str(vendor.id))
+            
+            
+            for key, val in data.items():
+                subtotal += float(key)
+                val = val.replace("'", '"')
+                val = json.loads(val)
+                tax_dict.update(val)
+
+                
+                for i in val:
+                    for j in val[i]:
+                        tax += float(val[i][j])
+        grand_total = float(subtotal) + float(tax)
+        context = {
+            'subtotal': subtotal,
+            'tax_dict': tax_dict, 
+            'grand_total': grand_total,
+        }
+
+        return context
+    
     def __str__(self):
         return self.order_number
     
