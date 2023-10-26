@@ -83,6 +83,7 @@ TEMPLATES = [
 
                 "accounts.context_processor.get_vendor",
                 "marketplace.context_processor.get_cart_counter",
+                "accounts.context_processor.get_user_profile",
                 "accounts.context_processor.get_google_api",
                 "marketplace.context_processor.get_cart_amounts",
                 'accounts.context_processor.get_paypal_client_id',
